@@ -16,11 +16,3 @@ python PRODIGY_CS01.py -t "Encrypted message here" -s 3 -m decrypt
 
 #### Interactive Mode
 If no arguments are provided, the program will switch to interactive mode where you can enter the message and shift value during execution.
-
-
-
-
-
-
-
-
