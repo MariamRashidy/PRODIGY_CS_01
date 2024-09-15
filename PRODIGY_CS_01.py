@@ -1,23 +1,29 @@
 import argparse
 
+# Caesar Cipher with support for letters, digits, and special characters
 def caesar_cipher(text, shift, mode='encrypt'):
     result = ""
-
+    
+    # Adjust shift direction for decryption
     if mode == 'decrypt':
         shift = -shift
 
-    for i in range(len(text)):
-        char = text[i]
+    # Full ASCII printable character range
+    start_ascii = 32
+    end_ascii = 126
+    total_chars = end_ascii - start_ascii + 1
 
-        if char.isupper():
-            result += chr((ord(char) + shift - 65) % 26 + 65)
-        elif char.islower():
-            result += chr((ord(char) + shift - 97) % 26 + 97)
+    for char in text:
+        if start_ascii <= ord(char) <= end_ascii:
+            shifted_char = chr((ord(char) - start_ascii + shift) % total_chars + start_ascii)
+            result += shifted_char
         else:
+            # If the character is outside the printable range, leave it unchanged
             result += char
 
     return result
 
+# Interactive mode for user input
 def interactive_mode():
     while True:
         message = input("Enter the message: ")
@@ -39,7 +45,7 @@ def interactive_mode():
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Caesar Cipher Program with Interactive Mode")
-    
+
     # Define arguments for text, shift, and mode
     parser.add_argument("-t", "--text", type=str, help="Input text for encryption or decryption")
     parser.add_argument("-s", "--shift", type=int, help="Shift value for Caesar Cipher")
